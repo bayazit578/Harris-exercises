@@ -6,8 +6,6 @@ module mux_4 #(
   output logic [WIDTH - 1:0] y
 );
 
-  logic [WIDTH - 1:0] low, high;
-
   always_comb begin
     case (select)
       2'b00: y = d0;
