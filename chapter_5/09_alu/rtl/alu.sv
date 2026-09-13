@@ -1,5 +1,5 @@
 module alu #(
-  parameter ALU_WIDTH = 32 
+  parameter ALU_WIDTH = 16
 )(
   input  logic [ALU_WIDTH - 1:0] a,
   input  logic [ALU_WIDTH - 1:0] b,
@@ -7,16 +7,16 @@ module alu #(
 
   output logic [ALU_WIDTH - 1:0] y
 );
+
+  initial assert (func !== 3'b011);
   
   logic [ALU_WIDTH - 1:0] slt_op, sum_op, and_op, or_op;
 
   logic [ALU_WIDTH - 1:0] b_muxed;
 
-  always_comb begin
-    b_muxed = func [2] ?     b :          ~b;
-    and_op  = func [2] ? a & b : a & b_muxed;
-    or_op   = func [2] ? a | b : a | b_muxed;
-  end
+  assign b_muxed = func [2] ? ~b : b;
+  assign and_op  = a & b_muxed;
+  assign or_op   = a | b_muxed;
 
   logic c_out;
 
@@ -28,7 +28,7 @@ module alu #(
     .c_out(c_out   )
   );
 
-  assign slt_op = {(ALU_WIDTH - 1)'0, y [ALU_WIDTH - 1]};
+  assign slt_op = {{(ALU_WIDTH - 1){1'b0}}, sum_op [ALU_WIDTH - 1]};
 
   mux_4 #(
     .WIDTH  (ALU_WIDTH)

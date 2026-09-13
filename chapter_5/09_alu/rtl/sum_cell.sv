@@ -7,4 +7,4 @@ module sum_cell(
 
   assign sum = a ^ b ^ g;
 
-endmodule
+endmodule : sum_cell

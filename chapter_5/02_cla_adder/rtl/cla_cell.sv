@@ -21,8 +21,8 @@ module cla_cell #(
   logic block_prg, block_gen;
 
   assign block_prg = & i_prg;
-  assign block_gen = inter_gens [TERM_WIDTH];
+  assign block_gen = inter_gens [TERM_WIDTH - 1];
 
   assign c_out = block_gen | (block_prg & c_in);
 
-endmodule
+endmodule : cla_cell

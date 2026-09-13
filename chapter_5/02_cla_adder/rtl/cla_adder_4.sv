@@ -19,7 +19,7 @@ module cla_adder_4(
   logic [3:0] prg, gen;
 
   assign prg = a | b;
-  assign gen = a * b;
+  assign gen = a & b;
 
   cla_cell #(
     .TERM_WIDTH (4)
@@ -30,4 +30,4 @@ module cla_adder_4(
     .c_out (c_out)
   );
 
-endmodule
+endmodule : cla_adder_4

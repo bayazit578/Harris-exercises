@@ -9,7 +9,7 @@ module cla_adder #(
   output logic                  c_out
 );
 
-  initial assert (TERM_WIDTH / 4 == 0);
+  initial assert (TERM_WIDTH % 4 == 0);
 
   localparam BLOCK_CNT  = TERM_WIDTH / 4;
 
