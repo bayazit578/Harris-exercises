@@ -1,9 +1,9 @@
-RTL_SRC   = rtl/cla_adder.sv rtl/cla_adder_4.sv \
-					  rtl/cla_cell.sv rtl/full_adder.sv rtl/ripple_carry_adder.sv
+RTL_SRC   = rtl/alu.sv rtl/mux_4.sv \
+					  rtl/prefix_adder.sv rtl/pg_cell.sv rtl/sum_cell.sv
 
-TB_SRC    = tb/cla_adder_tb.sv
+TB_SRC    = tb/alu_tb.sv
 
-TOP_MDL   = cla_adder_tb
+TOP_MDL   = alu_tb
 SIM_FLAGS = -g2012
 OUT_DIR   = build
 SIM       = sim

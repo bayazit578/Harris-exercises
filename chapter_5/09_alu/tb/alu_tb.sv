@@ -6,8 +6,7 @@ module alu_tb;
 
   logic [WIDTH - 1:0] a, b;
   logic [        2:0] func;
-  logic [WIDTH - 1:0] y, sum_op;
-  logic               c_out;
+  logic [WIDTH - 1:0] y;
 
   typedef enum logic [2:0] {
     AND_OP_B  = 3'b000,
@@ -22,12 +21,10 @@ module alu_tb;
   alu #(
     .ALU_WIDTH (WIDTH)
   ) DUT(
-    .a            (a   ),
-    .b            (b   ),
-    .func         (func),
-    .y            (y   ),
-    .debug_sum_op (sum_op),
-    .c_out        (c_out)
+    .a    (a   ),
+    .b    (b   ),
+    .func (func),
+    .y    (y   )
   );
   
   task automatic alu_check(
