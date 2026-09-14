@@ -6,7 +6,8 @@ module alu_tb;
 
   logic [WIDTH - 1:0] a, b;
   logic [        2:0] func;
-  logic [WIDTH - 1:0] y   ;
+  logic [WIDTH - 1:0] y, sum_op;
+  logic               c_out;
 
   typedef enum logic [2:0] {
     AND_OP_B  = 3'b000,
@@ -21,10 +22,12 @@ module alu_tb;
   alu #(
     .ALU_WIDTH (WIDTH)
   ) DUT(
-    .a    (a   ),
-    .b    (b   ),
-    .func (func),
-    .y    (y   )
+    .a            (a   ),
+    .b            (b   ),
+    .func         (func),
+    .y            (y   ),
+    .debug_sum_op (sum_op),
+    .c_out        (c_out)
   );
   
   task automatic alu_check(
@@ -40,12 +43,12 @@ module alu_tb;
     func = tfunc;
 
     case (tfunc)
-      AND_OP_B  : expected = a &  b                        ;
-      AND_OP_NB : expected = a & ~b                        ;
-      OR_OP_B   : expected = a |  b                        ;
-      OR_OP_NB  : expected = a | ~b                        ;
-      SUM_OP_B  : expected = a +  b + func [2]             ;
-      SUM_OP_NB : expected = a + ~b + func [2]             ;
+      AND_OP_B  : expected = a &  b;
+      AND_OP_NB : expected = a & ~b;
+      OR_OP_B   : expected = a |  b;
+      OR_OP_NB  : expected = a | ~b;
+      SUM_OP_B  : expected = a +  b + func [2];
+      SUM_OP_NB : expected = a + ~b + func [2];
       SLT_OP    : expected = {{(WIDTH - 1){1'b0}}, (a < b)};
     endcase
 
@@ -102,19 +105,7 @@ module alu_tb;
       );
     end
 
-    alu_check(
-      16'b0010110100001111,
-      16'b1100110010101011,
-      SLT_OP
-    );
-
-    alu_check(
-      16'b1101011100101101,
-      16'b0010111010001001,
-      SLT_OP
-    );
-
-    repeat (5) begin
+    repeat (125) begin
       alu_check(
         $urandom(), $urandom(), SLT_OP
       );

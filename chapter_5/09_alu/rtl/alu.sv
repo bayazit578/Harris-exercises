@@ -9,7 +9,7 @@ module alu #(
 );
 
   initial assert (func !== 3'b011);
-  
+
   logic [ALU_WIDTH - 1:0] slt_op, sum_op, and_op, or_op;
 
   logic [ALU_WIDTH - 1:0] b_muxed;
@@ -28,7 +28,7 @@ module alu #(
     .c_out(c_out   )
   );
 
-  assign slt_op = {{(ALU_WIDTH - 1){1'b0}}, sum_op [ALU_WIDTH - 1]};
+  assign slt_op = {{(ALU_WIDTH - 1){1'b0}}, ~c_out};
 
   mux_4 #(
     .WIDTH  (ALU_WIDTH)
