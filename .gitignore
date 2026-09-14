@@ -1,2 +1,4 @@
 chapter_4/
 *.yml
+*.vcd
+sim
