@@ -6,7 +6,7 @@ TOP_MDL   = prefix_adder_tb
 SIM_FLAGS = -g2012
 OUT_DIR   = build
 SIM       = sim
-WAVE      = alu.vcd
+WAVE      = prefix_adder.vcd
 
 .PHONY: all clean run wave
 all: $(OUT_DIR)/$(SIM)
